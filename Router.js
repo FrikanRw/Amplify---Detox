@@ -17,7 +17,7 @@ const RouterComponent = () => (
       {/* Sign up */}
       <Scene key="signup" component={signupPage} hideNavBar />
       {/* Login */}
-      <Scene key="login" component={loginPage} hideNavBar />
+      <Scene key="signin" component={loginPage} hideNavBar />
       {/* Email page */}
       <Scene key="email" component={emailPage} hideNavBar type={ActionConst.RESET} />
       {/* After Authenticated */}

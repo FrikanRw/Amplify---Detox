@@ -1,36 +1,18 @@
-/**
- * @file: src/pages/emailPage/emailPage.js
- * @description Renders email confirmation page
- * @copyright: Verge Technologies 2018
- * @author Frikan Erwee frikan@verge.co.za
- */
 import React, { Component } from 'react';
-import { View, ImageBackground, Text, StatusBar, Platform, NativeModules, Linking } from 'react-native';
+import { View, Text, Platform, NativeModules, Linking , Button} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Auth } from 'aws-amplify';
-
-import SplashScreen from 'react-native-splash-screen';
-import Button from '../../components/Button/Button';
+import styles from '../styles';
 // assets and components
-
-import styles from './styles';
-import { images } from '../../assets/common';
-import LogoMinimalIcon from '../../components/SVGicons/LogoMinimalIcon';
 
 class EmailPage extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       openedEmail: false,
     };
   }
 
-  async componentDidMount() {
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 1000);
-  }
 
   openMailApp=() => {
     setTimeout(() => {
@@ -53,49 +35,39 @@ class EmailPage extends Component {
 
   render() {
     return (
-      <ImageBackground source={images.signupScreenbackground} style={styles.BackgroundImage}>
-        <StatusBar translucent backgroundColor="transparent" barStyle="light-content" />
-        <View style={styles.Icon}>
-          <LogoMinimalIcon iconheight={26} iconwidth={108} />
-        </View>
-        <View testID="emailPage"style={styles.WholeBody}>
+      <View testID="emailPage" style={{flex:1, margin:24 ,justifyContent:'center', alignItems: 'center', marginTop:150}}>
           <View style={styles.TextHeader}>
             <Text style={styles.LargeText}>Email Verification</Text>
             <Text style={styles.MediumText}>We have sent an email to:</Text>
             <Text style={[styles.MediumText, styles.BoldMediumText]}>
               {this.props.username}
             </Text>
-            <Text style={[styles.MediumText, styles.InfoText]}>Tap on the link in your email to confirm your email address</Text>
+            <Text style={[styles.MediumText, styles.InfoText]}>Tap on the link in your email to confirm your email address...</Text>
           </View>
           <View style={styles.ButtonContainer}>
             <Button
-              BtestID="openEmail"
+              testID="openEmail"
               title="OPEN EMAIL APP"
-              width={279}
-              pressFunc={() => this.openMailApp()}
+              onPress={() => this.openMailApp()}
             />
           </View>
           <View style={styles.ButtonContainer}>
             <Button
-              BtestID="checkverifyEmail"
+              testID="checkverifyEmail"
               title="I HAVE VERIFIED MY EMAIL"
-              width={279}
-              pressFunc={() => this.checkConfirmation()}
-              ButtonDisable={!this.state.openedEmail}
+              onPress={() => this.checkConfirmation()}
+              disabled={!this.state.openedEmail}
             />
           </View>
           <View style={styles.ButtonContainer}>
             <Button
               title="RESEND CONFIRMATION"
-              BtestID="resendEmail"
-              width={279}
-              pressFunc={() => Auth.resendSignUp(this.props.username)}
-              ButtonDisable={!this.state.openedEmail}
+              testID="resendEmail"
+              onPress={() => Auth.resendSignUp(this.props.username)}
+              disabled={!this.state.openedEmail}
             />
           </View>
         </View>
-      </ImageBackground>
-
     );
   }
 }

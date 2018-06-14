@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text,Button } from 'react-native';
+import { View, Text } from 'react-native';
+import { Auth } from 'aws-amplify';
 
 class WelcomePage extends Component {
+ 
+  componentDidMount(){
+    const session = Auth.currentSession();
+    console.log(session);}
 
   render() {
     return (
-        <View style={{flex:1}}>
-        <View testID="welcomePage" style={styles.WholeBody}>
+      <View testID="welcomePage" style={{flex:1, margin:24 ,justifyContent:'center', alignItems: 'center', marginTop:100}}>
           <Text style={{color:'#00072d', fontSize:16}}>Welcome to DETOX-AMPLIFY</Text>
-            <Text style={{color:'#00072d', fontSize:14}}>On-demand protection for your favourite things. Choose what you want to insure, when you want to insure it.</Text>
-            <Button
-              title="LET’S GO"
-              width={279}
-              pressFunc={() => Actions.home()}
-            />
+            <Text style={{color:'#00072d', fontSize:14}}>Hope this helps you get into testing.</Text>
         </View>
-        </View>
-
     );
   }
 }

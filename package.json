@@ -14,12 +14,25 @@
     "react-native-router-flux": "^4.0.0-beta.31"
   },
   "devDependencies": {
+    "aws-cli-js": "^2.0.2",
     "babel-jest": "23.0.1",
     "babel-preset-react-native": "4.0.0",
+    "detox": "^7.4.2",
     "jest": "23.1.0",
+    "mocha": "^5.2.0",
     "react-test-renderer": "16.3.1"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "detox": {
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/AWSDetox.app",
+        "build": "xcodebuild -project ios/AWSDetox.xcodeproj -scheme AWSDetox -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone 6"
+      }
+    }
   }
 }

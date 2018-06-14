@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, ScrollView } from 'react-native';
+import { View, Text, TextInput, ScrollView, Button } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Auth } from 'aws-amplify';
 
 // common
-import { validateEmail, validatePassword, colorByValidation } from '../../common/functions';
+import { validateEmail, validatePassword, colorByValidation } from '../../assests/common';
+import styles from '../styles';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -63,13 +64,12 @@ class LoginPage extends Component {
 
   render() {
     return (
-        <View testID="signInPage" style={{flex: 1}}>
-          <ScrollView
-            testID="signupSV"
+      <View testID="signInpage" style={{flex:1, margin:24 ,justifyContent:'center', alignItems: 'center', marginTop:150}}>
+      <ScrollView
             ref={(scroll) => { this.scroll = scroll; }}
             showsVerticalScrollIndicator={false}>
           <Text style={{color:'#00072d', fontSize:16}}>Welcome Back</Text>
-          <Text style={{color:'#00072d', fontSize:14}}>Please sign in below=</Text>
+          <Text style={{color:'#00072d', fontSize:14}}>Please sign in below</Text>
               <View style={styles.TextInputContainer}>
                 <TextInput
                   testID="email-login"
@@ -89,6 +89,7 @@ class LoginPage extends Component {
                 <TextInput
                   testID="password-login"
                   placeholder="Password"
+                  autoCapitalize="none"
                   secureTextEntry
                   style={styles.TextInput}
                   value={this.state.password}
@@ -101,8 +102,9 @@ class LoginPage extends Component {
               <Button
                 onPress={() => this.login()}
                 disabled={!this.state.validEmail}
-                title="SIGN UP"
+                title="SIGN IN"
                 color="#064789"
+                testID="sign_in_button"
               />
             </View>
             <View style={styles.Bumper} />
